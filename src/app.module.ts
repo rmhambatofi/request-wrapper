@@ -7,10 +7,17 @@ import { QueriesModule } from './queries/queries.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'requests',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      // "type": "mysql",
+      // "host": "localhost",
+      // "port": 3306,
+      // "username": "rama0552_queries",
+      // "password": "Queries2022",
+      // "database": "rama0552_queries",
+      // "entities": ["**/*.entity{.ts,.js}"]
+      "type": "sqlite",
+      "database": "requests",
+      "entities": ["dist/**/*.entity{.ts,.js}"],
+      "synchronize": true
     }),
     QueriesModule,
   ],

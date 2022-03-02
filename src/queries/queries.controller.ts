@@ -8,6 +8,7 @@ export class QueriesController {
 
   @Get()
   index(): Promise<WebRequest[]> {
+    console.log('List all queries')
     return this.service.findAll();
   }
 

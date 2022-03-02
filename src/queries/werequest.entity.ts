@@ -1,12 +1,15 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, Generated, CreateDateColumn} from 'typeorm';
 
-@Entity()
+@Entity({
+  name: 'web_request'
+})
 export class WebRequest {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @Column({
     nullable: false,
+    name: 'host_name'
   })
   hostName: string;
 
@@ -22,6 +25,7 @@ export class WebRequest {
 
   @Column({
     nullable: true,
+    default: 'no-body'
   })
   body: string;
 
@@ -36,8 +40,12 @@ export class WebRequest {
   method: string;
 
   @Column({
-    type: 'clob',
     nullable: true,
   })
-  fullData: string;
+  headers: string;
+
+  @CreateDateColumn({
+    name: 'request_date'
+  })
+  requestDate: Date;
 }

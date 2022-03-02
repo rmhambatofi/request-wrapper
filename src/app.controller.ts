@@ -21,16 +21,21 @@ export class AppController {
 
   @Post('AutoResponse')
   autoResponse(@Req() request: Request): string {
+    console.log('====================== POST ===========================');
+    console.log(request);
     const req = new WebRequest();
-    req.query = request.query ? request.query.toString() : null;
-    req.params = request.params ? request.params.toString() : null;
+    req.query = request.query ? JSON.stringify(request.query) : null;
+    req.params = request.params ? JSON.stringify(request.params) : null;
     req.ip = request.ip;
     req.hostName = request.hostname;
     req.method = request.method;
-    req.body = request.body;
+    req.body = JSON.stringify(request.body);
+    req.headers = JSON.stringify(request.headers)
+
     this.queryService.create(req).then((value) => {
       console.log(value, ' created!');
     });
     return 'OK';
+    console.log('====================== END POST ==========================');
   }
 }
