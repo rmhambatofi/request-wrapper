@@ -1,7 +1,7 @@
-import {Entity, Column, PrimaryGeneratedColumn, Generated, CreateDateColumn} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, Generated, CreateDateColumn, Timestamp} from 'typeorm';
 
 @Entity({
-  name: 'web_request'
+  name: "web_request"
 })
 export class WebRequest {
   @PrimaryGeneratedColumn('increment')
@@ -9,7 +9,7 @@ export class WebRequest {
 
   @Column({
     nullable: false,
-    name: 'host_name'
+    name: "host_name"
   })
   hostName: string;
 
@@ -24,8 +24,7 @@ export class WebRequest {
   params: string;
 
   @Column({
-    nullable: true,
-    default: 'no-body'
+    nullable: true
   })
   body: string;
 
@@ -45,7 +44,7 @@ export class WebRequest {
   headers: string;
 
   @CreateDateColumn({
-    name: 'request_date'
+    name: "request_date",
   })
-  requestDate: Date;
+  requestDate: Timestamp;
 }
