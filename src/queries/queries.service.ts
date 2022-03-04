@@ -25,4 +25,19 @@ export class QueriesService {
   async delete(id): Promise<DeleteResult> {
     return await this.requestRepository.delete(id);
   }
+
+  async findById(id): Promise<WebRequest> {
+    return await this.requestRepository.findOne({id: id});
+  }
+
+  async getUnConsumedQueries(): Promise<WebRequest[]> {
+    return await this.requestRepository.find({
+      where: [
+        {isConsumed: "0"}
+      ],
+      order: {
+        requestDate: "DESC"
+      }
+    });
+  }
 }

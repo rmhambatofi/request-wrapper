@@ -43,8 +43,16 @@ export class WebRequest {
   })
   headers: string;
 
+  @Column({
+    name: "is_consumed",
+    type: "tinyint",
+    nullable: true,
+  })
+  isConsumed: boolean;
+
   @CreateDateColumn({
     name: "request_date",
+    type: "timestamp"
   })
-  requestDate: Timestamp;
+  requestDate: Date;
 }

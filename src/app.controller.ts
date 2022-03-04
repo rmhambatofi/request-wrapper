@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req } from '@nestjs/common';
+import {Body, Controller, Get, Headers, Post, Req} from '@nestjs/common';
 import { AppService } from './app.service';
 import { Request } from 'express';
 import { QueriesService } from './queries/queries.service';
@@ -20,9 +20,10 @@ export class AppController {
   }
 
   @Post('AutoResponse')
-  autoResponse(@Req() request: Request): string {
+    autoResponse(@Req() request): string {
     console.log('====================== POST ===========================');
-    console.log(request);
+    console.log("Headers: ", request.headers)
+    console.log("Body: ", request.body);
     const req = new WebRequest();
     req.query = request.query ? JSON.stringify(request.query) : null;
     req.params = request.params ? JSON.stringify(request.params) : null;
@@ -31,6 +32,7 @@ export class AppController {
     req.method = request.method;
     req.body = JSON.stringify(request.body);
     req.headers = JSON.stringify(request.headers)
+    req.requestDate = new Date();
 
     this.queryService.create(req).then((value) => {
       console.log(value, ' created!');
